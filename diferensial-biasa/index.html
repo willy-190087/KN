@@ -301,13 +301,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diferensial_biasa_dengan_metoda_runge-kutta" class="md-nav__link">
-    Diferensial Biasa dengan Metoda Runge-Kutta
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#rangkuman" class="md-nav__link">
     Rangkuman
   </a>
@@ -369,13 +362,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diferensial_biasa_dengan_metoda_runge-kutta" class="md-nav__link">
-    Diferensial Biasa dengan Metoda Runge-Kutta
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#rangkuman" class="md-nav__link">
     Rangkuman
   </a>
@@ -412,7 +398,7 @@
 <blockquote>
 <p>Diferensial biasa merupakan penentuan nilai terdekat turunan fungsi f.</p>
 </blockquote>
-<p>Diferensial Biasa dengan Metoda Euler dan Diferensial Biasa dengan Metoda Runge-Kutta adalah metode-metode yang sering digunakan untuk menyelesaikan permasalahan Diferensial biasa.</p>
+<p>Diferensial Biasa dengan Metoda Euler adalah metode-metode yang sering digunakan untuk menyelesaikan permasalahan Diferensial biasa.</p>
 <h2 id="diferensial_biasa_dengan_metoda_euler">Diferensial Biasa dengan Metoda Euler<a class="headerlink" href="#diferensial_biasa_dengan_metoda_euler" title="Permanent link">&para;</a></h2>
 <p>Diferensial biasa dengan metode Euler ditulis dengan bentuk persamaan dibawah berikut</p>
 <p>
@@ -486,95 +472,11 @@ plt.show<span class="o">()</span>
 </p>
 <p align="center"><b>Gambar</b> Grafik Solusi Persamaan di Atas</p>
 
-<h2 id="diferensial_biasa_dengan_metoda_runge-kutta">Diferensial Biasa dengan Metoda Runge-Kutta<a class="headerlink" href="#diferensial_biasa_dengan_metoda_runge-kutta" title="Permanent link">&para;</a></h2>
-<p>Perhitungan diferensial biasa menggunakan metode Runge-Kutta memiliki banyak jenis, tapi disini hanya akan menerangkan Metode Runge-Kutta Orde 4 atau Metode Runge-Kutta Klasik. Diferensial biasa dengan metode Runge-Kutta Klasik ditulis dengan bentuk persamaan dibawah berikut</p>
-<p>
-<script type="math/tex; mode=display">
-\mathrm{k}_{1}=\mathrm{hf}\left(\mathrm{t}_{\mathrm{n}}, \mathrm{y}_{\mathrm{n}}\right)
-</script>
-</p>
-<p><strong>Contoh :</strong> Dengan menggunakan Python dan metoda Runge - Kutta klasik , hitung diferensial dari persamaan dibawah berikut</p>
-<p>
-<script type="math/tex; mode=display">
-\dfrac{df\left( x\right) }{dx}=\dfrac{\left( x-y^{2}\right) }{2}
-</script>
-</p>
-<p><strong>Jawab :</strong></p>
-<p>Adapun Algoritma dan kode Python untuk penyelesaian persamaan diatas dengan metode Runge – Kutta klasik sebagai berikut </p>
-<ol>
-<li>
-<p>Mulai</p>
-</li>
-<li>
-<p>Tentukan fungsi f(x,y)</p>
-</li>
-<li>
-<p>Tentukan nilai titik awal (x0 dan y0), jumlah iterasi (n) dan titik perhitungan (xn)</p>
-</li>
-<li>
-<p>Hitung ukuran langkah (h = (xn - x0)/b)</p>
-</li>
-<li>
-<p>Hitung dengan persamaan Metoda Runge – Kutta klasik</p>
-</li>
-<li>
-<p>Tampilkan hasil</p>
-</li>
-<li>
-<p>Berhenti</p>
-</li>
-</ol>
-<p>Langkah-langkah di atas adalah urutan Algoritma untuk menghitung metode ini</p>
-<div class="codehilite"><pre><span></span><code>import numpy as np
-import matplotlib.pyplot as plt 
-import numba
-import <span class="nb">time</span>
-<span class="nv">start_time</span> <span class="o">=</span> time.clock<span class="o">()</span>
-
-@numba.jit<span class="o">()</span> 
-def dydx<span class="o">(</span>x, y<span class="o">)</span>: 
-    <span class="k">return</span> <span class="o">((</span>x - y**2<span class="o">)</span>/2<span class="o">)</span> 
-
-def rungeKutta<span class="o">(</span>x0, y0, x, h<span class="o">)</span>: 
-    <span class="nv">n</span> <span class="o">=</span> <span class="o">(</span>int<span class="o">)((</span>x - x0<span class="o">)</span>/h<span class="o">)</span>  
-    <span class="nv">y</span> <span class="o">=</span> y0 
-    <span class="k">for</span> i in range<span class="o">(</span><span class="m">1</span>, n + <span class="m">1</span><span class="o">)</span>:
-        <span class="nv">k1</span> <span class="o">=</span> h * dydx<span class="o">(</span>x0, y<span class="o">)</span> 
-        <span class="nv">k2</span> <span class="o">=</span> h * dydx<span class="o">(</span>x0 + <span class="m">0</span>.5 * h, y + <span class="m">0</span>.5 * k1<span class="o">)</span> 
-        <span class="nv">k3</span> <span class="o">=</span> h * dydx<span class="o">(</span>x0 + <span class="m">0</span>.5 * h, y + <span class="m">0</span>.5 * k2<span class="o">)</span> 
-        <span class="nv">k4</span> <span class="o">=</span> h * dydx<span class="o">(</span>x0 + h, y + k3<span class="o">)</span> 
-
-        <span class="nv">y</span> <span class="o">=</span> y + <span class="o">(</span><span class="m">1</span>.0 / <span class="m">6</span>.0<span class="o">)</span>*<span class="o">(</span>k1 + <span class="m">2</span> * k2 + <span class="m">2</span> * k3 + k4<span class="o">)</span> 
-        <span class="nv">x0</span> <span class="o">=</span> x0 + h 
-    <span class="k">return</span> y 
-
-def dplot<span class="o">(</span>start,end,steps<span class="o">)</span>:
-    <span class="nv">Y</span><span class="o">=</span>list<span class="o">()</span>
-    <span class="k">for</span> x in np.linspace<span class="o">(</span>start,end,steps<span class="o">)</span>:
-        Y.append<span class="o">(</span>rungeKutta<span class="o">(</span>x0, y, x , h<span class="o">))</span>
-    plt.plot<span class="o">(</span>np.linspace<span class="o">(</span>start,end,steps<span class="o">)</span>,Y<span class="o">)</span>
-    plt.show<span class="o">()</span>
-
-start,end <span class="o">=</span> <span class="m">0</span>, <span class="m">10</span>
-<span class="nv">steps</span> <span class="o">=</span> end* <span class="m">100</span>
-<span class="nv">x0</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">y</span> <span class="o">=</span> <span class="m">1</span>
-<span class="nv">h</span> <span class="o">=</span> <span class="m">0</span>.002
-
-dplot<span class="o">(</span>start,end,steps<span class="o">)</span>
-</code></pre></div>
-
-<p><strong>Hasil program :</strong></p>
-<p>Berdasarkan hasil program, diperoleh solusi persamaan diatas pada Gambar di bawah ini.</p>
-<p align="center">
-    <img width="500px" src="https://user-images.githubusercontent.com/58603228/122630663-a93c6200-d0ef-11eb-96f8-f849d953dac6.PNG" alt="Gambar Grafik Solusi Persamaan Soal Runge-Kutta">
-</p>
-
 <h2 id="rangkuman">Rangkuman<a class="headerlink" href="#rangkuman" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>Diferensial biasa merupakan penentuan nilai terdekat turunan fungsi f.</p>
 </blockquote>
-<p>Persoalan diferensial biasa dapat diselesaikan dengan menggunakan metoda metoda Runge – Kutta klasik dan metoda Euler. Setiap metode memiliki tingkat akurasi yang berbeda-beda. Perbedaan tingkat akurasi tiap metode bergantung pada pendekatan yang digunakan..</p>
+<p>Persoalan diferensial biasa dapat diselesaikan dengan menggunakan metoda Euler. Setiap metode untuk menyelesaikan diferensial biasa memiliki tingkat akurasi yang berbeda-beda. Perbedaan tingkat akurasi tiap metode bergantung pada pendekatan yang digunakan.</p>
 <h2 id="referensi">Referensi<a class="headerlink" href="#referensi" title="Permanent link">&para;</a></h2>
 <p>Afrianita, Reri., dan Heru Dibyo Laksono. 2015. Metoda Numerik dengan Matlab. Padang: LPTIK Universitas Andalas.</p>
 <!-- Internal References -->
